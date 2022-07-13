@@ -74,3 +74,4 @@ public class UserResource {
 
     }
 }
+    git remote set-url origin https://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@github.com/Saikumar1809/profileapp.git
