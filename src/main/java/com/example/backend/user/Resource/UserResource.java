@@ -46,6 +46,21 @@ public class UserResource {
                         .build()
         );
     }
+//    @GetMapping(path="/{email}")
+//    public ResponseEntity<Response> getUserByMail(@PathVariable("email") String email)  {
+//        User user=userService.getByEmail(email);
+//        System.out.println("email ki vasthundi");
+//        return ResponseEntity.ok(
+//                Response.builder()
+//                        .timeStamp(now())
+//                        .data(Map.of("user",user))
+//                        .message("user retrevied")
+//                        .status(OK)
+//                        .statusCode((OK.value()))
+//                        .build()
+//        );
+//    }
+
     @PostMapping("/signup")
     public ResponseEntity<Response> saveUser(@RequestBody @Valid User user) throws IOException {
         return ResponseEntity.ok(
@@ -63,13 +78,13 @@ public class UserResource {
 
         if (userService.verifyLogin(details.getEmail(), details.getPassword())){
             System.out.println("coming to login");
-            User user=userService.get(details.getEmail());
+            User user=userService.getByEmail(details.getEmail());
             user.setIsLogin(true);
             userService.update(user);//updating the login
             return ResponseEntity.ok(
                     Response.builder()
                             .timeStamp(now())
-                            .data(Map.of("email",user.getEmail()))
+                            .data(Map.of("id",user.getId()))
                             .message("user logged in success fully")
                             .status(OK)
                             .statusCode((OK.value()))
@@ -78,13 +93,13 @@ public class UserResource {
         }
         else{
             System.out.println("coming to login failed");
-            User user=userService.get(details.getEmail());
+            User user=userService.getByEmail(details.getEmail());
             user.setIsLogin(false);
             System.out.println(user.toString());
             return ResponseEntity.ok(
                     Response.builder()
                             .timeStamp(now())
-                            .data(Map.of("email", "not"))
+                            .data(Map.of("id", "-1"))
                             .message("invalid credentials")
                             .status(UNAUTHORIZED)
                             .statusCode((UNAUTHORIZED.value()))

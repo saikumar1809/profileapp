@@ -40,7 +40,7 @@ public class UserServiceImplementation  implements UserService {
 
         return userRepo.findById(id).get();
     }
-    public User get(String email) {
+    public User getByEmail(String email) {
         log.info("Fetching user by id:{}",email);
 
         return userRepo.findByEmail(email);
