@@ -45,6 +45,13 @@ public class UserServiceImplementation  implements UserService {
     }
 
     @Override
+    public Boolean verifyLogin(String email, String password) {
+        User user=userRepo.findByEmail(email);
+        return user.getPassword()==password?Boolean.TRUE:Boolean.FALSE;
+    }
+
+
+    @Override
     public Boolean delete(Long id) {
 
         log.info("Deleting user:{}",id);

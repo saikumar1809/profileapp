@@ -1,5 +1,6 @@
 package com.example.backend.Resource;
 
+import com.example.backend.model.Login;
 import com.example.backend.model.Response;
 import com.example.backend.model.User;
 import com.example.backend.service.implementation.UserServiceImplementation;
@@ -58,10 +59,25 @@ public class UserResource {
                         .build()
         );
     }
+    @PostMapping("/login")
+    public ResponseEntity<Response> loginUser(@RequestBody @Valid Login details){
+      //  System.out.println("coming to login");;
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("login",details.getEmail()))
+                        .message("user logged in success fully")
+                        .status(OK)
+                        .statusCode((OK.value()))
+                        .build()
+        );
+
+
+        }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> deleteServer(@PathVariable("id")Long id){
+    public ResponseEntity<Response> deleteUser(@PathVariable("id")Long id){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
@@ -74,4 +90,3 @@ public class UserResource {
 
     }
 }
-    git remote set-url origin https://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@github.com/Saikumar1809/profileapp.git
