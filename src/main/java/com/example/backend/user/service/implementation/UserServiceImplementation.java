@@ -1,8 +1,8 @@
-package com.example.backend.service.implementation;
+package com.example.backend.user.service.implementation;
 
-import com.example.backend.model.User;
-import com.example.backend.repo.UserRepo;
-import com.example.backend.service.UserService;
+import com.example.backend.user.model.User;
+import com.example.backend.user.repo.UserRepo;
+import com.example.backend.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Collection;
+
+import static java.lang.Boolean.TRUE;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -37,17 +40,21 @@ public class UserServiceImplementation  implements UserService {
 
         return userRepo.findById(id).get();
     }
+    public User get(String email) {
+        log.info("Fetching user by id:{}",email);
 
+        return userRepo.findByEmail(email);
+    }
     @Override
     public User update(User user) {
-        log.info("Updating user:{}",user.getFirst_name());
+       // log.info("Updating user:{}",user.getFirst_name());
         return userRepo.save(user);
     }
 
     @Override
     public Boolean verifyLogin(String email, String password) {
         User user=userRepo.findByEmail(email);
-        return user.getPassword()==password?Boolean.TRUE:Boolean.FALSE;
+        return user.getPassword().equals(password);
     }
 
 
@@ -56,7 +63,7 @@ public class UserServiceImplementation  implements UserService {
 
         log.info("Deleting user:{}",id);
         userRepo.deleteById(id);
-        return Boolean.TRUE;
+        return TRUE;
 
     }
 

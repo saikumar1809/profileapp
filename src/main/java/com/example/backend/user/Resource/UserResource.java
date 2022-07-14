@@ -1,9 +1,9 @@
-package com.example.backend.Resource;
+package com.example.backend.user.Resource;
 
-import com.example.backend.model.Login;
-import com.example.backend.model.Response;
-import com.example.backend.model.User;
-import com.example.backend.service.implementation.UserServiceImplementation;
+import com.example.backend.user.model.Login;
+import com.example.backend.user.model.Response;
+import com.example.backend.user.model.User;
+import com.example.backend.user.service.implementation.UserServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import static java.time.LocalDateTime.now;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequestMapping("/user")
@@ -60,17 +59,38 @@ public class UserResource {
         );
     }
     @PostMapping("/login")
-    public ResponseEntity<Response> loginUser(@RequestBody @Valid Login details){
-      //  System.out.println("coming to login");;
-        return ResponseEntity.ok(
-                Response.builder()
-                        .timeStamp(now())
-                        .data(Map.of("login",details.getEmail()))
-                        .message("user logged in success fully")
-                        .status(OK)
-                        .statusCode((OK.value()))
-                        .build()
-        );
+    public ResponseEntity<Response> loginUser(@RequestBody @Valid Login details) {
+
+        if (userService.verifyLogin(details.getEmail(), details.getPassword())){
+            System.out.println("coming to login");
+            User user=userService.get(details.getEmail());
+            user.setIsLogin(true);
+            userService.update(user);//updating the login
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(now())
+                            .data(Map.of("email",user.getEmail()))
+                            .message("user logged in success fully")
+                            .status(OK)
+                            .statusCode((OK.value()))
+                            .build()
+            );
+        }
+        else{
+            System.out.println("coming to login failed");
+            User user=userService.get(details.getEmail());
+            user.setIsLogin(false);
+            System.out.println(user.toString());
+            return ResponseEntity.ok(
+                    Response.builder()
+                            .timeStamp(now())
+                            .data(Map.of("email", "not"))
+                            .message("invalid credentials")
+                            .status(UNAUTHORIZED)
+                            .statusCode((UNAUTHORIZED.value()))
+                            .build()
+            );
+        }
 
 
         }

@@ -1,6 +1,6 @@
-package com.example.backend.model;
+package com.example.backend.user.model;
 
-import com.example.backend.enumration.Status;
+import com.example.backend.user.enumration.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,5 +38,6 @@ public class User {
     private Status status;
     @NotEmpty(message = "password cannot be empty or null")
     private String password;
+    private Boolean isLogin;
 
 }

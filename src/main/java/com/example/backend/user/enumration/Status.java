@@ -1,4 +1,4 @@
-package com.example.backend.enumration;
+package com.example.backend.user.enumration;
 
 public enum Status {
     ONLINE("ONLINE"),
