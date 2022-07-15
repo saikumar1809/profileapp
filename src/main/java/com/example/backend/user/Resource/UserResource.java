@@ -1,7 +1,7 @@
 package com.example.backend.user.Resource;
 
 import com.example.backend.user.model.Login;
-import com.example.backend.user.model.Response;
+import com.example.backend.Response;
 import com.example.backend.user.model.User;
 import com.example.backend.user.service.implementation.UserServiceImplementation;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +36,7 @@ public class UserResource {
     @GetMapping("/{id}")
     public ResponseEntity<Response> getUser(@PathVariable("id") Long id)  {
         User user=userService.get(id);
+        System.out.println(user);
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())

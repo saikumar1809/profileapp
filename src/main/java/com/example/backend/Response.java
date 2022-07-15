@@ -1,4 +1,4 @@
-package com.example.backend.user.model;
+package com.example.backend;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;

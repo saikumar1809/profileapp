@@ -25,12 +25,12 @@ public class Address {
    private  String country;
    private int postalcode;
 
-   @OneToOne(fetch = FetchType.EAGER)
+   //@OneToOne(fetch = FetchType.EAGER)
    @JoinColumn(name="address_type_id",referencedColumnName = "id")
-   private Address_Type address_type_id;
-    @OneToOne(fetch = FetchType.EAGER)
+   private long addressTypeId;
+    //@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id",referencedColumnName = "id")
-    private User user_id;
+    private long userId;
 
 
 
