@@ -44,4 +44,16 @@ public class EducationResource {
                         .build()
         );
     }
+//    @GetMapping("/list")
+//    public ResponseEntity<Response> getUsers(){
+//        return ResponseEntity.ok(
+//                Response.builder()
+//                        .timeStamp(now())
+//                        .data(Map.of("users",employmentTypeService.list(30)))
+//                        .message("employment retrevied")
+//                        .status(OK)
+//                        .statusCode((OK.value()))
+//                        .build()
+//        );
+//    }
 }

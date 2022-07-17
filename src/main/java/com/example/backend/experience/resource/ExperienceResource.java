@@ -1,7 +1,7 @@
 package com.example.backend.experience.resource;
 
 import com.example.backend.Response;
-import com.example.backend.education.model.Education;
+import com.example.backend.experience.model.experience;
 import com.example.backend.experience.model.Experience;
 import com.example.backend.experience.service.implementation.ExperienceServiceImplementation;
 import lombok.RequiredArgsConstructor;
@@ -22,11 +22,11 @@ public class ExperienceResource {
 
     private final ExperienceServiceImplementation experienceService;
     @PostMapping("/")
-    public ResponseEntity<Response> saveEducation(@RequestBody @Valid Experience experience){
+    public ResponseEntity<Response> saveexperience(@RequestBody @Valid Experience experience){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("education",experienceService.create(experience)))
+                        .data(Map.of("experience",experienceService.create(experience)))
                         .message("experience created")
                         .status(CREATED)
                         .statusCode((CREATED.value()))
@@ -38,7 +38,7 @@ public class ExperienceResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("education",experienceService.getAllByUserId(userId)))
+                        .data(Map.of("experience",experienceService.getAllByUserId(userId)))
                         .message("experience reterived")
                         .status(OK)
                         .statusCode((OK.value()))

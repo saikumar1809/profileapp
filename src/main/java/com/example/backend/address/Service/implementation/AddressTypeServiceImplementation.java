@@ -2,8 +2,7 @@ package com.example.backend.address.Service.implementation;
 
 import com.example.backend.address.Service.AddressTypeService;
 import com.example.backend.address.model.Address_Type;
-import com.example.backend.education.model.repo.Address_TypeRepo;
-import com.example.backend.user.model.User;
+import com.example.backend.address.repo.Address_TypeRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;

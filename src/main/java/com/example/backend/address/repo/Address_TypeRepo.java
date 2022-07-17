@@ -1,4 +1,4 @@
-package com.example.backend.education.model.repo;
+package com.example.backend.address.repo;
 
 import com.example.backend.address.model.Address_Type;
 import org.springframework.data.jpa.repository.JpaRepository;
