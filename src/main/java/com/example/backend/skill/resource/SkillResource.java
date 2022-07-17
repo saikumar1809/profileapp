@@ -1,8 +1,8 @@
-package com.example.backend.experience.resource;
+package com.example.backend.skill.resource;
 
 import com.example.backend.Response;
-import com.example.backend.experience.model.Experience;
-import com.example.backend.experience.service.implementation.ExperienceServiceImplementation;
+import com.example.backend.skill.model.Skill;
+import com.example.backend.skill.service.implementation.SkillServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,18 +15,18 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/user/experience/")
+@RequestMapping("/user/skill/")
 @RequiredArgsConstructor
-public class ExperienceResource {
+public class SkillResource {
 
-    private final ExperienceServiceImplementation experienceService;
+    private final SkillServiceImplementation skillService;
     @PostMapping("/")
-    public ResponseEntity<Response> saveexperience(@RequestBody @Valid Experience experience){
+    public ResponseEntity<Response> saveSkill(@RequestBody @Valid Skill skill){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("experience",experienceService.create(experience)))
-                        .message("experience created")
+                        .data(Map.of("Skill",skillService.create(skill)))
+                        .message("Skill created")
                         .status(CREATED)
                         .statusCode((CREATED.value()))
                         .build()
@@ -37,8 +37,8 @@ public class ExperienceResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("experience",experienceService.getAllByUserId(userId)))
-                        .message("experience reterived")
+                        .data(Map.of("Skill",skillService.getAllByUserId(userId)))
+                        .message("Skill reterived")
                         .status(OK)
                         .statusCode((OK.value()))
                         .build()

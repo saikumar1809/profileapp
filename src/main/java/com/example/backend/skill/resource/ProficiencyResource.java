@@ -30,10 +30,6 @@ public class ProficiencyResource {
                         .statusCode((CREATED.value()))
                         .build()
         );
-
-
-
-
     }
     @GetMapping("/list")
     public ResponseEntity<Response> getSkills(){
