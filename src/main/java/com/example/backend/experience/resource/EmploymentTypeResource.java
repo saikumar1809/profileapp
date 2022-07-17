@@ -1,9 +1,10 @@
-package com.example.backend.address.Resource;
+package com.example.backend.experience.resource;
 
 import com.example.backend.Response;
-import com.example.backend.address.Service.implementation.AddressTypeServiceImplementation;
-import com.example.backend.address.model.Address;
 import com.example.backend.address.model.Address_Type;
+import com.example.backend.experience.model.EmploymentType;
+import com.example.backend.experience.service.implementation.EmploymentTypeServiceImplementation;
+import com.example.backend.experience.service.implementation.ExperienceServiceImplementation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +17,16 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/user/address/addressType")
+@RequestMapping("/user/experience/employment-type")
 @RequiredArgsConstructor
-public class AddressTypeResource {
-
-    private final AddressTypeServiceImplementation addressTypeService;
+public class EmploymentTypeResource {
+   private final EmploymentTypeServiceImplementation employmentTypeService;
     @PostMapping("/")
-    public ResponseEntity<Response> saveAddress(@RequestBody @Valid Address_Type addressType){
+    public ResponseEntity<Response> saveAddress(@RequestBody @Valid EmploymentType employmentType){
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("user",addressTypeService.create(addressType)))
+                        .data(Map.of("employment",employmentTypeService.create(employmentType)))
                         .message("addressType created")
                         .status(CREATED)
                         .statusCode((CREATED.value()))
@@ -42,8 +42,8 @@ public class AddressTypeResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("users",addressTypeService.list(30)))
-                        .message("users retrevied")
+                        .data(Map.of("users",employmentTypeService.list(30)))
+                        .message("employment retrevied")
                         .status(OK)
                         .statusCode((OK.value()))
                         .build()
@@ -57,12 +57,11 @@ public class AddressTypeResource {
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(now())
-                        .data(Map.of("Address",addressTypeService.get(addressTypeId)))
-                        .message("addressType reterived")
+                        .data(Map.of("Address",employmentTypeService.get(addressTypeId)))
+                        .message("employment type reterived")
                         .status(OK)
                         .statusCode((OK.value()))
                         .build()
         );
     }
-
 }
